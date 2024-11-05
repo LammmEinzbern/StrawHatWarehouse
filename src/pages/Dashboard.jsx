@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { supabase } from "../utils/SupaClient";
 import LoadingSkeleton from "../components/nextui/LoadingSkeleton";
 import Layout from "../components/Layout";
+import { useAuth } from "../auth/AuthProvider";
 
 const Dashboard = () => {
   const [barang, setBarang] = useState(0);
   const [JenisBarang, setJenisBarang] = useState({});
   const [loadingSkeleton, setLoadingSkeleton] = useState();
+  const { username } = useAuth();
 
-  //fungsi buat mentotalkan semua barang yang ada di tabel
   const totalBarang = async () => {
     setLoadingSkeleton(true);
     try {
@@ -18,7 +19,6 @@ const Dashboard = () => {
 
       const jenisBarang = ["makanan", "minuman"];
 
-      // untuk memfilterkan jenis barang
       const countTotalJenisBarang = jenisBarang.map((jenis) =>
         supabase
           .from("barang")
@@ -26,13 +26,11 @@ const Dashboard = () => {
           .eq("jenis_barang", jenis)
       );
 
-      // untuk menampilkan data secara bersamaan
       const results = await Promise.all([
         countTotalBarang,
         ...countTotalJenisBarang,
       ]);
 
-      // menampilkan data
       const totalCount = results[0].count;
       let counts = {};
       results.slice(1).forEach((result, index) => {
@@ -58,7 +56,7 @@ const Dashboard = () => {
       <section id="dashboard" className="p-4 md:p-10 ">
         <div className="bg-cyan-950 text-white rounded-lg p-6 md:p-10 h-auto  ">
           <h2 className="text-2xl md:text-4xl font-semibold">
-            Selamat Datang {import.meta.env.VITE_NAME_USER}
+            Selamat Datang {username}
           </h2>
           <p className="text-sm md:text-lg mt-2">
             selamat datang!, Hola humans! ini adalah website Straw Hat

@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../components/Layout";
 import { Button, Spinner } from "@nextui-org/react";
 import { supabase } from "../../utils/SupaClient";
-import Swal from "sweetalert2";
 const UbahBarang = () => {
   const { id } = useParams();
   const navigate = useNavigate();

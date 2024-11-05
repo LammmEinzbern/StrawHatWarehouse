@@ -16,6 +16,7 @@ export default function DropdownUser() {
   const { username } = useAuth();
   const { email } = useAuth();
   const { avatar } = useAuth();
+  const { fullName } = useAuth();
 
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -50,7 +51,11 @@ export default function DropdownUser() {
             <DropdownMenu aria-label="User Actions" variant="flat">
               <DropdownItem key="profile" className="h-14 gap-2">
                 <p className="font-bold">Signed in as</p>
+                <p className="font-bold">{fullName}</p>
                 <p className="font-bold">@ {username}</p>
+              </DropdownItem>
+              <DropdownItem>
+                <Link to={"/profile-user"}>Profile</Link>
               </DropdownItem>
               <DropdownItem key="logout" color="danger" onClick={handleLogout}>
                 Log Out

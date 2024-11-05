@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
   const [role, setRole] = useState("");
   const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState("");
-
+  const [fullName, setFullName] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -49,6 +49,7 @@ const AuthProvider = ({ children }) => {
           .eq("id", userId);
 
         setUsername(userData[0].username);
+        setFullName(userData[0].full_name);
         setRole(userData[0].role);
         setEmail(userData[0].email);
         setAvatar(userData[0].avatar_url);
@@ -82,6 +83,7 @@ const AuthProvider = ({ children }) => {
         loading,
         email,
         avatar,
+        fullName,
       }}
     >
       {loading ? (

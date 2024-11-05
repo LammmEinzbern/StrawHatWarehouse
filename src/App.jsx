@@ -10,6 +10,7 @@ import UbahDetailSupplier from "./pages/supplier/UbahDetailSupplier";
 import AllBarang from "./pages/AllBarang";
 import Login from "./auth/Login";
 import AuthAdmin from "./auth/AuthAdmin";
+import Profile from "./Profile";
 
 const App = () => {
   return (
@@ -32,6 +33,8 @@ const App = () => {
           <Route path="/detail-supplier/:id" element={<DetailSupplier />} />
 
           <Route path="/edit-supplier/:id" element={<UbahDetailSupplier />} />
+
+          <Route path="/profile-user" element={<Profile />} />
         </Route>
       </Routes>
     </BrowserRouter>
